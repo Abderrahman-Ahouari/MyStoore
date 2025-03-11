@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Model\categorie;
+use App\Model\section;
 
-
-class CategorieController extends Controller
+class SectionController extends Controller
 {
         public function create(Request $request){
         $validateData = $request->validate([
@@ -14,27 +13,27 @@ class CategorieController extends Controller
             'description'=>'required|string|max:400',   
         ]);
 
-        categorie::create($validateData);
+        section::create($validateData);
         }
 
         public function update(request $request,$id){
-            $categorie = categorie::findorFail($id);
+            $section = section::findorFail($id);
 
             $validateData = $request->validate([
                 'name'=>'nullable|string|max:70',   
                 'description'=>'nullable|string|max:400',   
             ]);
-             $categorie::update($validateData);
+             $section::update($validateData);
         }
 
         public function destroy($id){
-            $categorie = categorie::findorFail($id);
+            $section = section::findorFail($id);
 
-            $categorie->delete();
+            $section->delete();
         }
 
         public function getAll(){
-            $categories = DB::table('categories')->get();
-            return responce()->json($categories);
+            $section = DB::table('sections')->get();
+            return responce()->json($section);
         }
 }
